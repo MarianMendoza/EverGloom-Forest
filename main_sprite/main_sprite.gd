@@ -32,6 +32,11 @@ func _physics_process(_delta):
 	#Call state function
 	pick_new_state()
 	
+func _unhandled_input(event:InputEvent) -> void:
+	if Input.is_action_just_pressed("ui_accept"):
+		DialogueManager.show_example_dialogue_balloon(load("res://dialouge/main.dialogue"),"start")
+		return
+
 func update_animation_parameters(move_input : Vector2):
 	if(move_input != Vector2.ZERO):
 		animation_tree.set("parameters/idle/blend_position",move_input)
