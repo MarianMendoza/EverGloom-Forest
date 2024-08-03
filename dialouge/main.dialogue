@@ -1,5 +1,31 @@
 ~ start
 
 Maria: Hi Alia!
+if apple_status == "has":
+	Aila: I got an apple!
+	- Give to Maria
+		set State.apple_status = "gave"
+		Ail: Here you go!
+		Maria: Thank you so much!
+	- Keep Apple
+		Aila: I'm sorry I'll get you another apple.
+		Maria: That's fine take your time , I just need it by tomorrow.
+elif apple_status == "gave":
+	Maria: Thanks so much!
+else:
+	Aila: I still haven't found an apple.
+	Maria: I heard there were some growing near Jill's house, if you want to take a look.
+	Aila: Perfect thank you! I'll try get one as soon as I can.
+
+
+
+=> END
+
+~ pick_apple
+
+Aila: Nice! An Apple
+Aile: I better give this to Maria.
+
+set apple_status = "has"
 
 => END

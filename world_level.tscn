@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c1soiq4eem086"]
+[gd_scene load_steps=15 format=3 uid="uid://c1soiq4eem086"]
 
 [ext_resource type="PackedScene" uid="uid://bvdnoi4bgwsv7" path="res://main_sprite/main_sprite.tscn" id="1_jpxt1"]
 [ext_resource type="Texture2D" uid="uid://bfmjnhr17ftcj" path="res://art/Tileset/houses.png" id="2_cylfr"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dx416l4e5gjpa" path="res://npc_sprite.tscn" id="5_qgjg3"]
 [ext_resource type="PackedScene" uid="uid://dc6vuttw0hhnx" path="res://actionable.tscn" id="6_pv2vs"]
 [ext_resource type="Resource" uid="uid://cqjrdge55fpjn" path="res://dialouge/main.dialogue" id="7_ng42y"]
+[ext_resource type="PackedScene" uid="uid://bftdtnsrkxywi" path="res://tree.tscn" id="8_4lnnj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r0p3g"]
 texture = ExtResource("2_cylfr")
@@ -13220,8 +13221,11 @@ sources/2 = SubResource("TileSetAtlasSource_4elmo")
 [sub_resource type="CircleShape2D" id="CircleShape2D_cg8s4"]
 radius = 9.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_dh3mx"]
+radius = 12.0416
+
 [node name="WorldLevel" type="Node2D"]
-position = Vector2(-402, -953)
+position = Vector2(-214, -1022)
 
 [node name="MainSprite" parent="." instance=ExtResource("1_jpxt1")]
 position = Vector2(164, 1336)
@@ -13255,8 +13259,18 @@ position = Vector2(205, 1309)
 
 [node name="actionable" parent="NPC" instance=ExtResource("6_pv2vs")]
 dialogue_resource = ExtResource("7_ng42y")
-dialouge_start = "start"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/actionable"]
 position = Vector2(-1, 6)
 shape = SubResource("CircleShape2D_cg8s4")
+
+[node name="StaticBody2D" parent="." instance=ExtResource("8_4lnnj")]
+position = Vector2(161, 1285)
+
+[node name="actionable" parent="StaticBody2D" instance=ExtResource("6_pv2vs")]
+dialogue_resource = ExtResource("7_ng42y")
+dialouge_start = "pick_apple"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/actionable"]
+position = Vector2(0, 7)
+shape = SubResource("CircleShape2D_dh3mx")

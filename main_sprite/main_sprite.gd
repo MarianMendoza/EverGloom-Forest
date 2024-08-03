@@ -7,7 +7,7 @@ extends CharacterBody2D
 
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
-
+@onready var actionable_finder: Area2D = $Direction/actionablefinder
 #ready
 func _ready():
 	update_animation_parameters(starting_direction)
@@ -34,7 +34,9 @@ func _physics_process(_delta):
 	
 func _unhandled_input(event:InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
-		DialogueManager.show_example_dialogue_balloon(load("res://dialouge/main.dialogue"),"start")
+		var actionables = actionable_finder.get_overlapping_areas()
+		if actionables.size() > 0:
+			actionables[0].action()
 		return
 
 func update_animation_parameters(move_input : Vector2):
